@@ -19,7 +19,7 @@ function playRound(playerSelection, computerSelection) {
   if (winCombo[playerSelection] === computerSelection){
     return `You win! ${playerSelection} beats ${computerSelection}`;
   } else if (playerSelection === computerSelection) {
-    return `You Draw`;
+    return `It's a tie!`;
   } else {
     return `You lose! ${computerSelection} beats ${playerSelection}`;
   }
@@ -49,5 +49,5 @@ function playRound(playerSelection, computerSelection) {
 
     }
 
-  playGame()
+  playGame();
   
