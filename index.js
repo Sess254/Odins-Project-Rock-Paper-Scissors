@@ -25,4 +25,29 @@ function playRound(playerSelection, computerSelection) {
   }
 
   }
+
+  function playGame() {
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for (let i = 0; i < 5; i++) {
+      const playerSelection = prompt(`Whats your selection (rock, paper, scissors)`);
+      const computerSelection = getComputersChoice();
+      const roundResults = playRound(playerSelection, computerSelection);
+      console.log(roundResults);
+
+      if (roundResults.startsWith('You win')) {
+        playerScore++;
+      } else if (roundResults.startsWith('You lose')) {
+        computerScore++;
+      }
+      const finalScore = playerScore > computerScore ? 'You Win' : (playerScore === computerScore ? "It's a tie" : "You lose");
+      console.log(`Final Score : You ${playerScore} , Computer ${computerScore}`);
+      console.log(finalScore);
+      
+      }
+
+    }
+
+  playGame()
   
