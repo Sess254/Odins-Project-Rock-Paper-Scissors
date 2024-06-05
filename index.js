@@ -10,6 +10,12 @@ buttons.forEach(button=>{
 
 })
 
+function disableAllButtons() {
+  buttons.forEach(elements =>{
+    elements.disabled = true 
+  })
+}
+
 
 function getComputersChoice () {
   const choices = [
@@ -32,18 +38,20 @@ function playRound(playerSelection) {
   };
 
   if (winCombo[playerSelection] === computerSelection){
-    playerScore += 1
+    playerScore ++
     results = (`You win! ${playerSelection} beats ${computerSelection} <br>Player's score: ${playerScore} <br>Computer's score: ${computerScore}`)
     if (playerScore === 5) {
       results += `<br>You won the game! Reload the page to play again`
+      disableAllButtons()
     }
   } else if (playerSelection === computerSelection) {
     results = (`It's a tie! you both choose ${playerSelection}<br> Player's score: ${playerScore}<br> Computer's score: ${computerScore}`)
   } else {
-    computerScore += 1
+    computerScore ++
     results = (`You lose! ${computerSelection} beats ${playerSelection}<br>Player's score: ${playerScore}<br>Computer's score:${computerScore}`)
     if (computerScore === 5) {
       results += `<br>You Lost the game! Reload the page to play again`
+      disableAllButtons()
     }
   }
 
