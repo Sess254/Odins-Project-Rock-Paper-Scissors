@@ -1,3 +1,16 @@
+let playerScore = 0;
+let computerScore = 0;
+const buttons = document.querySelectorAll('input')
+
+
+buttons.forEach(button=>{
+  button.addEventListener('click', function(){
+    playRound(button.value)
+  })
+
+})
+
+
 function getComputersChoice () {
   const choices = [
     "rock",
@@ -8,8 +21,10 @@ function getComputersChoice () {
   return choices[randomIndex];
 }
 
-function playRound(playerSelection, computerSelection) {
-  playerSelection = playerSelection.toLowerCase();
+function playRound(playerSelection) {
+  const computerSelection = getComputersChoice()
+  let results = ''
+
   const winCombo = {
     rock: 'scissors',
     paper: 'rock',
@@ -17,37 +32,21 @@ function playRound(playerSelection, computerSelection) {
   };
 
   if (winCombo[playerSelection] === computerSelection){
-    return `You win! ${playerSelection} beats ${computerSelection}`;
-  } else if (playerSelection === computerSelection) {
-    return `It's a tie!`;
-  } else {
-    return `You lose! ${computerSelection} beats ${playerSelection}`;
-  }
-
-  }
-
-  function playGame() {
-    let playerScore = 0;
-    let computerScore = 0;
-
-    for (let i = 0; i < 5; i++) {
-      const playerSelection = prompt(`Whats your selection (rock, paper, scissors)`);
-      const computerSelection = getComputersChoice();
-      const roundResults = playRound(playerSelection, computerSelection);
-      console.log(roundResults);
-
-      if (roundResults.startsWith('You win')) {
-        playerScore++;
-      } else if (roundResults.startsWith('You lose')) {
-        computerScore++;
-      }
-      const finalScore = playerScore > computerScore ? 'You Win' : (playerScore === computerScore ? "It's a tie" : "You lose");
-      console.log(`Final Score : You ${playerScore} , Computer ${computerScore}`);
-      console.log(finalScore);
-      
-      }
-
+    playerScore += 1
+    results = (`You win! ${playerSelection} beats ${computerSelection} <br>Player's score: ${playerScore} <br>Computer's score: ${computerScore}`)
+    if (playerScore === 5) {
+      results += `<br>You won the game! Reload the page to play again`
     }
+  } else if (playerSelection === computerSelection) {
+    results = (`It's a tie! you both choose ${playerSelection}<br> Player's score: ${playerScore}<br> Computer's score: ${computerScore}`)
+  } else {
+    computerScore += 1
+    results = (`You lose! ${computerSelection} beats ${playerSelection}<br>Player's score: ${playerScore}<br>Computer's score:${computerScore}`)
+    if (computerScore === 5) {
+      results += `<br>You Lost the game! Reload the page to play again`
+    }
+  }
 
-  playGame();
+  document.getElementById('game-results').innerHTML = results
   
+}
